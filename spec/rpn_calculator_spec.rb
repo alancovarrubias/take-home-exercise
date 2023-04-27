@@ -34,4 +34,10 @@ RSpec.describe RpnCalculator do
       expect(res).to eq(11)
     end
   end
+  describe 'test case #4' do
+    it 'should return 0.625' do
+      res = calculator.parse('5', '9', '1', '-', '/')
+      expect(res).to eq(0.625)
+    end
+  end
 end
