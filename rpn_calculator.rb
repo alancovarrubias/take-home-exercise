@@ -10,9 +10,7 @@ class RpnCalculator
   end
 
   def parse(*inputs)
-    inputs.each do |input|
-      parse_input(input)
-    end
+    inputs.each { |input| parse_input(input) }
     @stack.last
   end
 
@@ -26,8 +24,8 @@ class RpnCalculator
   end
 
   def perform_operation(operator)
-    operand1 = @stack.pop.to_i
-    operand2 = @stack.pop.to_i
+    operand1 = @stack.pop.to_f
+    operand2 = @stack.pop.to_f
     operand2.send(operator, operand1)
   end
 end
