@@ -1,18 +1,24 @@
-require 'rpn_calculator'
-require 'process_input'
+require 'rpn_cli'
+
+def simulate_user_input(*inputs)
+  allow_any_instance_of(Object).to receive(:gets).and_return(*inputs)
+end
+
+def verify_output(text)
+  cli = RpnCli.new
+  expect { cli.run }.to output(text).to_stdout
+end
 
 RSpec.describe 'process_input' do
   it 'outputs result from valid input' do
-    # Simulate user input
-    allow_any_instance_of(Object).to receive(:gets).and_return("1 1 +\n", "q\n")
+    simulate_user_input("1 1 +\n", "q\n")
 
-    calculator = RpnCalculator.new
+    verify_output("> 2.0\n> ")
+  end
 
-    expect(calculator).to receive(:parse).with('1 1 +').and_return(2.0)
-    expect do
-      process_input do |input|
-        calculator.parse(input)
-      end
-    end.to output("> 2.0\n> ").to_stdout
+  it 'outputs nothing with empty input' do
+    simulate_user_input("1\n", " \n", "\n", "q\n")
+
+    verify_output("> 1.0\n> \n> \n> ")
   end
 end

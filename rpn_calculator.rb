@@ -19,7 +19,7 @@ class RpnCalculator
   end
 
   def parse_element(element)
-    result = element.integer? ? element.to_i : perform_operation(element)
+    result = element.integer? ? element.to_f : perform_operation(element)
     @stack.push(result)
   end
 
