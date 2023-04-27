@@ -20,10 +20,15 @@ class RpnCli
   def process_input
     loop do
       print '> '
-      input = gets.chomp
+      input = gets
+      break unless input
+
+      input.chomp!
       break if input.downcase == 'q'
 
-      result = yield input unless input.strip.empty?
+      next if input.strip.empty?
+
+      result = yield input
       puts result
     end
   end

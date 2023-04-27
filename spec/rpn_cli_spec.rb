@@ -19,7 +19,7 @@ RSpec.describe 'process_input' do
   it 'outputs nothing with empty input' do
     simulate_user_input("1\n", " \n", "\n", "q\n")
 
-    verify_output("> 1\n> \n> \n> ")
+    verify_output("> 1\n> > > ")
   end
 
   it 'outputs error message with invalid input' do
