@@ -9,9 +9,15 @@ class RpnCalculator
     @stack = []
   end
 
-  def parse(str)
-    str.split(' ').each { |element| parse_element(element) }
+  def parse(*inputs)
+    inputs.each do |input|
+      parse_input(input)
+    end
     @stack.last
+  end
+
+  def parse_input(input)
+    input.split(' ').each { |element| parse_element(element) }
   end
 
   def parse_element(element)
