@@ -1,107 +1,58 @@
-Code Sample
+CLI RPN Calculator
 ===================
 
-We would like to get to know your coding style and see what you would consider your best work.
-In subsequent interviews, we'll talk through your code and make some changes.
-
-CLI RPN Calculator
-==================
-
-Implement a command-line reverse polish notation (RPN) calculator using a language that you know well.
-
-Imaginary Context
+Description
 -----------------
 
-We're building this command-line calculator for people who are comfortable with UNIX-like CLI utilities.
-We are starting with the basic 4 operators now but will want to eventually implement other operators and
-an alternate interface (such as WebSocket, file, or TCP socket).
-There's no need to implement these, but design with these future changes in mind.
+This Ruby project implements a calculator which uses Reverse Polish Notation (RPN), a mathematical notation in which operators follow their operands instead of preceding them.
+
+Guidelines
+==================
 
 Specifications
 --------------
 
-1. The calculator should use standard input and standard output
-2. It should implement the four standard arithmetic operators
-3. The calculator should handle errors and recover gracefully
-4. The calculator should exit when it receives a `q` command or an end of input 
-   indicator (EOF / Ctrl+D)
+1. The calculator uses standard input and standard output.
+2. The calculator implements the four standard arithmetic operators `+`, `-`, `*`, `/`.
+3. The calculator handles errors and recovers gracefully.
+4. The calculator exits when it receives a `q` command or an end of input indicator (EOF / Ctrl+D).
 
-You may take creative liberty with anything else; have fun with it!
+Installation
+--------------
 
-Example Input/Output
---------------------
+Clone this respository to your local filesystem.
+Ensure Ruby 2.7 or higher is installed on your system.
+Run this command `ruby rpn_runner.rb` to get CLI running.
 
-Use your best judgment as far as the format is concerned, as long as it makes sense to the end user. Your calculator should at the minimum handle the following examples. 
+Instructions
+--------------
+Begin typing integers or floats into the CLI followed by any valid operators.
+Any invalid characters will return an 'Invalid expression' message.
+Not having enough operands to perform an operation will return a 'Not enough operands' message.
+Dividing by zero will return a 'Divide by zero' message.
+To exit the CLI, you can either enter q as input or use an end of input indicator (EOF / Ctrl+D).
 
-    > 5 
-    5
-    > 8
-    8
-    > +
-    13
+Architectural Decisions
+==================
 
----
+Development Methodologies
+-----------------
 
-    > 5 5 5 8 + + -
-    -13.0
-    > 13 +
-    0.0
+Following the Test-Driven Development (TDD) methodology, this project's tests were written before the actual implementation. This approach ensures that the Command Line Interface (CLI) functions to the extent covered by the tests.
 
----
+Error Handling
+-----------------
 
-    > -3
-    -3.0
-    > -2
-    -2.0
-    > *
-    6.0
-    > 5
-    5.0
-    > +
-    11.0
+We created a custom exception for RPN calculator errors, allowing us to handle them uniquely and provide a better user experience by displaying the appropriate error message.
 
----
+Maintainability
+-----------------
 
-    > 5
-    5
-    > 9
-    9
-    > 1
-    1
-    > -
-    8
-    > /
-    0.625
+To facilitate future updates, we decoupled the RPN CLI logic from the RPN Input Parser. These two classes are linked using constructor injection in the runner.rb file. By decoupling the input source from the calculator logic, we gain the flexibility to change the input source without affecting the core calculator functionality.
 
-Guidelines
-==========
+Future Work
+-----------------
 
-Things We Care About
---------------------
-
-These hold true both for this submission and for your work here in general. We expect that:
-
-- It works right
-- The code is well-abstracted and uses good names
-- It provides for a good user experience (end-user and programmer)
-- The code adheres to style and practices accepted by the community
-- Tests demonstrate intended use, help prevent regression, and can withstand change
-- You write intention-revealing commit messages
-
-There are a range of expectations from various companies in their interviewing code exercises, from minimal code to get the job done and prove you can program, to expecting exemplary code that demonstrates how well you can design things when the occasion requires it. We tend to judge toward the latter end of the spectrum, assuming that anyone who can write well-crafted code can also scale down quality to do things quickly, but not necessarily the other way around.
-
-Readme
-------
-
-Write your README as if it was for a production service. Include the following items:
-
-* A high-level description of your solution
-* Reasoning behind your technical choices, including architectural
-* Trade-offs you might have made, anything you left out, or what you might do differently if you were to spend additional time on the project
-* How to run your code, if applicable
-* Link to the hosted application, if applicable
-
-Submitting
-----------
-
-Submit your code as a **separate** git repository, preferably on GitHub
+1. There still exists some coupling between the two. Our custom exception should be made more general in order to handle any exception that needs to be caught and display the corresponding error message to the user.
+2. To improve the modularity of our tests, we should also avoid direct references to the Input Parser in our CLI tests. Instead we should use a mock object that returns a predefined value or throws an exception, allowing us to test the CLI in isolation.
+3. To ensure that our implementation is robust, we should create additional tests to cover any possible edge cases we encounter. Only then can we be confident that our calculator can handle any unexpected input or scenarios that may arise during its use.
