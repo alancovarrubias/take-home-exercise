@@ -7,8 +7,14 @@ class RpnCli
 
   def run
     process_input do |input|
-      @calculator.parse(input)
+      calculate_output(input)
     end
+  end
+
+  def calculate_output(input)
+    @calculator.parse(input)
+  rescue RpnException => e
+    e.message
   end
 
   def process_input
