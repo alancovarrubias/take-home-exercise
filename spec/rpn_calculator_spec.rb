@@ -21,4 +21,11 @@ RSpec.describe RpnCalculator do
       expect(res).to eq(13)
     end
   end
+  describe 'test case #2' do
+    it 'should return -13' do
+      calculator = RpnCalculator.new
+      res = calculator.parse('5 5 5 8 + + -')
+      expect(res).to eq(-13.0)
+    end
+  end
 end
