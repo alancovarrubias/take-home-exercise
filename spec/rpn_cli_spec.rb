@@ -1,7 +1,8 @@
 require 'rpn_cli'
 
 RSpec.describe 'process_input' do
-  subject(:cli) { RpnCli.new }
+  subject(:input_parser) { RpnInputParser.new }
+  subject(:cli) { RpnCli.new(input_parser) }
   def simulate_user_input(*inputs)
     allow_any_instance_of(Object).to receive(:gets).and_return(*inputs)
   end

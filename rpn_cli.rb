@@ -1,8 +1,6 @@
-require './rpn_input_parser'
-
 class RpnCli
-  def initialize
-    @input_parser = RpnInputParser.new
+  def initialize(input_parser)
+    @input_parser = input_parser
   end
 
   def run
