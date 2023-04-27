@@ -4,7 +4,7 @@ class RpnException < StandardError
   end
 end
 
-module ExpressionParser
+module RpnExpressionCalculator
   INTEGER_REGEX = /\A([-+]?[0-9]+)\z/.freeze
   FLOAT_REGEX = /\A([-+]?[0-9]*\.?[0-9]+)\z/.freeze
   OPERATOR_REGEX = %r{[+\-*/]}.freeze
@@ -38,8 +38,8 @@ module ExpressionParser
   end
 end
 
-class RpnCalculator
-  include ExpressionParser
+class RpnInputParser
+  include RpnExpressionCalculator
 
   def initialize
     @stack = []

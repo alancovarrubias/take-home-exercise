@@ -1,8 +1,8 @@
-require './rpn_calculator'
+require './rpn_input_parser'
 
 class RpnCli
   def initialize
-    @calculator = RpnCalculator.new
+    @input_parser = RpnInputParser.new
   end
 
   def run
@@ -12,7 +12,7 @@ class RpnCli
   end
 
   def calculate_output(input)
-    @calculator.parse(input)
+    @input_parser.parse(input)
   rescue RpnException => e
     e.message
   end

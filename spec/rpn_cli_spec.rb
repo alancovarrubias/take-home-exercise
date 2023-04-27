@@ -1,13 +1,13 @@
 require 'rpn_cli'
 
 RSpec.describe 'process_input' do
-  subject { RpnCli.new }
+  subject(:cli) { RpnCli.new }
   def simulate_user_input(*inputs)
     allow_any_instance_of(Object).to receive(:gets).and_return(*inputs)
   end
 
   def verify_output(text)
-    expect { subject.run }.to output(text).to_stdout
+    expect { cli.run }.to output(text).to_stdout
   end
 
   it 'outputs result from valid input' do
